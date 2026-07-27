@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: searched
+source: https://status.formality.com/
+versioning: null
+deprecation: null
+sla: null
+status_page: https://status.formality.com/
+status_page_provider: Hyperping
+monitored_components:
+- formality.com
+- app.eu1.formality.com
+- app.fr1.formality.com
+deprecated_operations: []
+notes: >-
+  Formality publishes a public Hyperping status page monitoring its marketing
+  site and its EU (app.eu1) and France (app.fr1) application regions, with a
+  "Get updates" subscribe option and 90-day uptime history. No public REST API,
+  versioning policy, deprecation policy, or SLA document was found (Formality is
+  a SaaS product with no advertised public developer API at this time).

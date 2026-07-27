@@ -1,7 +1,19 @@
 aid: formality
 name: Formality
-description: 'Formality is a company surfaced as a portfolio company of partech and added to the API Evangelist
-  network as a stub for enrichment. Sector: AI/ML. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Formality is a Paris-based AI platform for end-to-end asset and contract
+  intelligence, aimed at businesses that need to centralize, understand, and
+  track their legal, administrative, and asset-related documents. The product
+  covers the full contract lifecycle: AI-assisted creation and collaborative
+  negotiation, electronic signature, then post-signature data extraction,
+  deadline and obligation alerts, and natural-language analysis of the resulting
+  document estate. Its AI is trained on corporate legal documents, works across
+  multiple languages, and runs inside a secure perimeter with full auditability
+  and no use of customer data for model training. Formality integrates with
+  tools including Google Drive, SharePoint, DocuWare, Docusign, Universign,
+  Yousign, HubSpot, Salesforce, Outlook, Teams, Slack, and Gmail, and runs on
+  compliant hosting with ISO 27001 and SOC 2 Type II certifications and GDPR
+  compliance. It was founded in 2023 and is backed by Partech, Serena, and Bpifrance.
 url: https://raw.githubusercontent.com/api-evangelist/formality/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,12 +21,30 @@ x-backed-by:
 - partech
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
+image: https://framerusercontent.com/images/hEwKjnYt6aQ2PnIpW5a9LjGDmG4.svg
 tags:
 - Company
 - Ai/Ml
+- Legal
+- Contract Management
+- Document Management
+- Asset Intelligence
+- Compliance
+- SaaS
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -24,3 +54,20 @@ maintainers:
 common:
 - type: Website
   url: https://www.formality.com/
+- type: PrivacyPolicy
+  url: https://www.formality.com/policies/personal-data-protection-policy/
+- type: StatusPage
+  url: https://status.formality.com/
+- type: Compliance
+  url: https://www.formality.com/en/security
+- type: TrustCenter
+  url: https://www.formality.com/en/security
+- type: Lifecycle
+  url: lifecycle/formality-lifecycle.yml
+- type: DomainSecurity
+  url: security/formality-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

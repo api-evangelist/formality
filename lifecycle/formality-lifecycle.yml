@@ -1,19 +1,72 @@
-generated: '2026-07-19'
+generated: '2026-08-17'
 method: searched
-source: https://status.formality.com/
-versioning: null
-deprecation: null
-sla: null
+source:
+- https://status.formality.com/
+- https://help.formality.com/integrations/api
+versioning:
+  scheme: uri-path
+  current: v1
+  position: /api/v1/...
+  docs: https://help.formality.com/integrations/api
+  policy_url: null
+  support_window: null
+  note: >-
+    UPGRADED THIS ROUND. The 2026-07-19 pass recorded versioning as null because no
+    API had been found; a v1 URI-path scheme is now confirmed from Formality's own API
+    documentation (every documented path is /api/v1/...). There is still no published
+    versioning POLICY — nothing states how a v2 would be introduced, how long v1 is
+    supported, or how a breaking change would be signalled.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no
+    end-of-life notices. NO type:Deprecation pointer is emitted in apis.yml as a
+    result.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No SLA document is published. The status page exposes 90 days of uptime history but
+    states no commitment, and there is no public terms-of-service or DPA to carry one.
 status_page: https://status.formality.com/
 status_page_provider: Hyperping
+status_page_subscribe: true
 monitored_components:
 - formality.com
 - app.eu1.formality.com
 - app.fr1.formality.com
+status_page_note: >-
+  The status page monitors the marketing site plus both regional application hosts. It
+  does NOT list the API surface, the auth host (auth.eu1.formality.com) or the help
+  centre as separate components, so an API consumer cannot distinguish an API incident
+  from an application incident. Note the monitored app hosts are the same hosts that
+  serve /api/v1/, which is what let this round locate the real API base after the
+  documented host (app.formality.com) proved not to resolve.
+changelog:
+  published: false
+  note: >-
+    No changelog, release notes or "what's new" page exists. The full help centre corpus
+    was searched (via the provider's own llms-full.txt export) for changelog /
+    nouveautés / release notes; the only hits are a marketing aside inviting users to
+    "follow our news" and a feedback page. No changelog/ artifact was written and no
+    type:ChangeLog pointer emitted.
+roadmap:
+  published: false
+  note: >-
+    No public roadmap. A feedback / feature-request page exists
+    (https://help.formality.com/faq/feedback) but it collects requests rather than
+    publishing plans.
 deprecated_operations: []
 notes: >-
-  Formality publishes a public Hyperping status page monitoring its marketing
-  site and its EU (app.eu1) and France (app.fr1) application regions, with a
-  "Get updates" subscribe option and 90-day uptime history. No public REST API,
-  versioning policy, deprecation policy, or SLA document was found (Formality is
-  a SaaS product with no advertised public developer API at this time).
+  Formality publishes a public Hyperping status page and a v1 URI-versioned API, but
+  none of the surrounding lifecycle commitments an integrator needs: no versioning
+  policy, no deprecation policy or Sunset headers, no SLA, no changelog and no roadmap.
+  For a platform whose own product is contract obligation tracking, the absence of a
+  published API change contract is the notable gap.
+gaps_worth_raising_with_provider:
+- Publish a versioning and deprecation policy for /api/v1.
+- Add the API and auth hosts as status-page components.
+- Publish a dated changelog.
+- Publish an SLA / uptime commitment.

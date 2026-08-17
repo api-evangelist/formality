@@ -1,21 +1,69 @@
-generated: '2026-07-19'
+generated: '2026-08-17'
 method: searched
-probe: false
-source: https://www.formality.com/en/security
-url: https://www.formality.com/en/security
+probe: true
+source: https://www.formality.com/en/index.html#security
+url: https://www.formality.com/en/index.html#security
 certifications:
 - SOC 2 Type II
 - ISO 27001
 - GDPR
+security_controls_published:
+- {control: access control, detail: 'Granular access control, complete audit trail.'}
+- {control: hosting sovereignty, detail: 'Data stored in Europe or in France (Scaleway).'}
+- {control: AI training exclusion, detail: 'Never trained on your data. Agents operate within a secured perimeter, fully auditable.'}
+- {control: encryption, detail: 'AES-256 at rest, TLS 1.3 in transit.'}
+- {control: reversibility, detail: 'Full export at any time, no lock-in, no opacity.'}
+- {control: SSO enforcement, detail: 'Workspace toggle forcing Google/Microsoft SSO and terminating non-SSO sessions.',
+   source: https://help.formality.com/setup-permissions/user-management}
+- {control: document-access webhook, detail: 'HMAC-SHA256-signed notifications on document view, download, bulk download and signature.',
+   source: https://help.formality.com/setup-permissions/user-management}
+- {control: allowed email domains, detail: 'Admins restrict which email domains may be invited.',
+   source: https://help.formality.com/setup-permissions/user-management}
+- {control: audit trail, detail: 'Audit trail plus per-object change history; deactivated users retain history.',
+   source: https://help.formality.com/setup-permissions/changes-audit-trail}
+commitments:
+- {name: One Clause, detail: 'Signatory of One Clause.'}
+trust_portal:
+  exists: false
+  subdomain_probed: [trust.formality.com, security.formality.com]
+  note: >-
+    No dedicated trust portal and no automated evidence-sharing centre. Certification
+    claims are prose on the marketing site; no certificate numbers, auditor names,
+    audit scope, report dates or NDA-gated report request flow are published, and the
+    SOC 2 report is not obtainable from any public surface.
+url_correction:
+  previous_url: https://www.formality.com/en/security
+  previous_status: 403
+  checked: '2026-08-17'
+  note: >-
+    DEFECT FIXED THIS ROUND. The 2026-07-19 pass recorded
+    https://www.formality.com/en/security as the source, and both the Compliance and
+    TrustCenter pointers in apis.yml targeted it. That URL now returns HTTP 403 from the
+    S3/CloudFront origin — the standalone security page no longer exists after the site
+    was rebuilt on Framer, and the same is true of the old PrivacyPolicy pointer
+    (/policies/personal-data-protection-policy/, also 403). The certification and
+    security content now lives in the "Security & sovereignty" section anchored at
+    /en/index.html#security. apis.yml pointers were repointed accordingly.
 notes: >-
-  Formality publishes a security & compliance page stating ISO 27001 and SOC 2
-  Type II certifications are held and renewed annually, and that it operates as a
-  GDPR-compliant data processor. AI agents are stated to run in a secure perimeter
-  with full auditability and no customer data used to train models. Compliant
-  hosting is offered in the customer's chosen location. No dedicated trust-portal
-  subdomain (trust.formality.com) or automated evidence-sharing center was found;
-  claims are published on the marketing security page. The site is a JavaScript
-  (Framer) app, so the automated curl probe did not surface these keywords.
+  Formality publishes a substantive security posture for a company of its size —
+  ISO 27001 and SOC 2 Type II claimed and renewed annually, EU/France data residency
+  with a named infrastructure partner (Scaleway), AES-256 at rest, TLS 1.3 in transit,
+  contractual prohibition on AI vendors training on customer data, full export
+  reversibility, and real tenant-level controls (enforced SSO, email-domain
+  allowlisting, HMAC-signed document-access webhooks, audit trail).
+
+  The weakness is verifiability rather than substance: everything is self-declared prose
+  with no trust portal, no certificate identifiers and no path to the underlying
+  reports. Live probing also surfaced a regression the marketing copy does not mention —
+  the www origin now serves NO HSTS header, and the registrable domain still has no
+  DNSSEC, no CAA records and DMARC at p=none. Those are recorded in
+  security/formality-domain-security.yml.
 evidence:
+- source: https://www.formality.com/en/index.html
+  http_status: 200
+  fetched: '2026-08-17'
+  keywords: [iso 27001, soc 2 type ii, aes-256, tls 1.3, scaleway, one clause, audit trail]
 - source: https://www.formality.com/en/security
-  keywords: [soc 2 type ii, iso 27001, gdpr, auditability]
+  http_status: 403
+  fetched: '2026-08-17'
+  note: previous round's source URL, now dead

@@ -1,0 +1,103 @@
+# Formality Help Center
+
+## Help Center
+
+- [Centre d'aide Formality](https://help.formality.com/readme.md)
+- [Bienvenue sur Formality !](https://help.formality.com/start/welcome.md): Bienvenue sur Formality, la vision 360° de vos contrats. Ici, tout est réuni pour rédiger, suivre et sécuriser vos contrats les plus complexes.
+- [Premiers pas sur la plateforme](https://help.formality.com/start/first-steps.md): Ce que vous devez savoir pour débuter avec Formality
+- [Page d'Accueil](https://help.formality.com/start/homepage.md): Bienvenue sur votre tableau de bord Formality
+- [Glossaire des termes clés](https://help.formality.com/start/glossary.md)
+- [Qu'est-ce qu'un Accord ?](https://help.formality.com/agreements/definition.md): Centralisez tous les documents liés à un même projet ou relation contractuelle dans une enveloppe unique et exploitable.
+- [Créer un Accord](https://help.formality.com/agreements/create-agreement.md): Créez un nouvel Accord en quelques minutes, avec extraction automatique des données clés et application immédiate des bons workflows et permissions.
+- [Modifier un Accord](https://help.formality.com/agreements/edit-agreement.md): Cet article explique comment modifier un Accord et ajuster ses valeurs.
+- [Comment sont gérés les avenants de contrat ?](https://help.formality.com/agreements/amendments.md): Formality détecte automatiquement lorsqu’un nouveau document est lié à un contrat existant, afin de garder vos dossiers complets et à jour, sans saisie manuelle.
+- [Discuter avec un Accord](https://help.formality.com/agreements/chat-with-agreement.md): Posez vos questions, extrayez des clauses et obtenez des explications claires, directement à partir de vos accords.
+- [Vérifier et valider les documents importés](https://help.formality.com/agreements/validating-document-imports.md): Vérifiez les extractions et ajoutez vos documents à la bibliothèque Formality en toute confiance.
+- [Gérer les documents sur la plateforme](https://help.formality.com/agreements/document-processing.md): Centralisez vos imports, regroupez vos documents et suivez l’avancement de leur traitement
+- [Droits sur les Accords](https://help.formality.com/agreements/permissions.md): Les droits déterminent qui peut voir, modifier ou gérer vos accords. Configurez-les pour assurer la confidentialité et la bonne collaboration.
+- [Personnaliser les Accords avec les Propriétés](https://help.formality.com/agreements/personnaliser-les-accords-avec-les-proprietes.md): Structurez vos Accords de façon claire, cohérente et exploitable par vos équipes comme par l’IA.
+- [Structurer vos Accords avec les catégories, sections & champs](https://help.formality.com/agreements/structurer-vos-accords-avec-les-categories-sections-and-champs.md)
+- [Organiser vos documents avec les Dossiers](https://help.formality.com/agreements/folders.md): Retrouvez n'importe quel document en quelques secondes grâce à une arborescence structurée.
+- [Partager des dossiers avec des utilisateurs externes](https://help.formality.com/agreements/share-externally.md): Formality vous permet de collaborer non seulement en interne mais également en externe sur vos projets contractuels et vos accords.
+- [Automatiser l’extraction des données des accords avec l’IA](https://help.formality.com/agreements/automatiser-lextraction-des-donnees-des-accords-avec-lia.md)
+- [Utiliser une Trame de contrat](https://help.formality.com/agreements/template.md): Découvrez comment télécharger et personnaliser une Trame depuis la plateforme ou Teams
+- [Bonnes pratiques : droits sur les Accords](https://help.formality.com/agreements/best-practices-permissions.md)
+- [Standardiser vos clauses contractuelles avec la Bibliothèque de clauses](https://help.formality.com/agreements/clause-library.md)
+- [Collaborer entre équipes sur Formality](https://help.formality.com/collaboration/teamwork.md): Guide pratique pour comprendre les fonctionnalités qui permettent aux équipes de mieux collaborer autour des actifs.
+- [Utiliser Formality dans plusieurs langues](https://help.formality.com/collaboration/languages.md): Adaptez Formality à votre façon de travailler : choisissez la langue de la plateforme, traduisez vos champs texte en un clic et laissez l’Assistant répondre dans la langue qui vous convient.
+- [Suivre les échéances de mes Accords](https://help.formality.com/collaboration/deadlines.md): Apprenez à suivre facilement les échéances de vos Accords dans Formality et à configurer des rappels automatiques pour ne jamais manquer un renouvellement.
+- [Workflows: automatisez vos validations et ne manquez plus aucun renouvellement](https://help.formality.com/collaboration/workflows-automatisez-vos-validations-et-ne-manquez-plus-aucun-renouvellement.md): Structurez vos processus contractuels, assignez les bonnes équipes et anticipez vos échéances automatiquement.
+- [Utiliser les dates relatives dans vos accords](https://help.formality.com/collaboration/relative-dates.md): Gagnez du temps et évitez les erreurs : définissez vos échéances par rapport à une autre date et laissez la plateforme calculer automatiquement la date exacte
+- [Qu'est-ce que les Vues ?](https://help.formality.com/collaboration/views.md): Enregistrez vos filtres une fois et retrouvez vos Accords en un clic.
+- [Qu'est-ce qu'une Vue partagée ?](https://help.formality.com/collaboration/shared-views.md)
+- [Explorer ses contrats avec une Vue analytique](https://help.formality.com/collaboration/chart-views.md): Anticipez vos échéances et comprenez votre portefeuille via les Vues graphiques.
+- [Voir exactement ce qui a changé dans vos contrats avec les snapshots](https://help.formality.com/collaboration/snapshots.md)
+- [Ajouter et utiliser les notes internes](https://help.formality.com/collaboration/notes.md): Découvrez les notes internes : un pense-bête individuel ou partagé pour retrouver vos notes au bon endroit.
+- [Ajouter des champs personnalisés aux accords](https://help.formality.com/collaboration/custom-fields.md): Enrichissez vos fiches accords avec des champs adaptés à vos besoins : dates, montants, listes déroulantes ou champs texte.
+- [Ajouter des sections personnalisées aux fiches synthétiques](https://help.formality.com/collaboration/sections.md): Structurez vos fiches accords selon vos besoins en créant des sections personnalisées, en plus des sections disponibles par défaut.
+- [Utiliser les dates relatives dans les accords](https://help.formality.com/collaboration/utiliser-les-dates-relatives-dans-les-accords.md): Simplifiez la gestion de vos échéances : reliez vos dates entre elles et Formality s’occupe des calculs.
+- [La pré-signature chez Formality](https://help.formality.com/collaboration/la-pre-signature-chez-formality.md): Accélérer la signature sans compromettre la conformité
+- [Utiliser les champs variables dans les trames](https://help.formality.com/collaboration/template-variables.md): Générez des documents personnalisés automatiquement en insérant les bons champs au bon endroit de votre Trame de contrat.
+- [Collaborez directement sur vos fiches](https://help.formality.com/collaboration/activity.md): Utilisez les Activités pour collaborer autour d'un contrat ou d'un projet, avec toujours le bon contexte.
+- [Qu'est-ce qu'un Actif ?](https://help.formality.com/assets/definition.md): Visualisez vos sites, reliez-les à vos contrats et entités, et obtenez une vue géographique complète de votre portefeuille
+- [Naviguez entre vos sites, entités et contrats en un clic](https://help.formality.com/assets/relations.md)
+- [Créer une nouvelle Entité gérée](https://help.formality.com/entities/create-entity.md): Pour cartographier vos Entités gérées, créez-les depuis votre module dédié.
+- [Documents & données liées aux Entités](https://help.formality.com/entities/entity-management.md): Avec les entités centralisées sur Formality, fini les allers-retours entre dossiers, fichiers partagés et mails : tout est regroupé dans un seul endroit.
+- [Personnaliser les champs et les sections avec le Studio des Entités](https://help.formality.com/entities/customize-entities.md): Avec le Studio des Entités, vous pouvez adapter Formality aux besoins spécifiques de votre organisation en créant vos propres sections et champs pour les entités internes et les contreparties.
+- [Gestion des groupes](https://help.formality.com/setup-permissions/group-management.md)
+- [Gestion des utilisateurs](https://help.formality.com/setup-permissions/user-management.md)
+- [Les permissions par défaut](https://help.formality.com/setup-permissions/default-permissions.md): Les permissions définissent qui peut voir et agir dans Formality. Configurez-les correctement pour garder le contrôle sur vos données
+- [Gestion des intégrations](https://help.formality.com/setup-permissions/integrations-hub.md): Pour connecter Formality à vos outils existants, rendez-vous dans le Hub d’intégrations de votre espace de travail. Vous y trouverez les connecteurs disponibles aujourd’hui ainsi que ceux à venir.
+- [Qu'est-ce qu'une Trame de contrat ?](https://help.formality.com/setup-permissions/templates.md): Découvrez à quoi servent les Trames de contrats et comment ils garantissent la cohérence des documents juridiques.
+- [Créer ou modifier une Trame de contrat](https://help.formality.com/setup-permissions/edit-template.md): Apprenez à ajouter ou mettre à jour une Trame de contrat au format dans Formality.
+- [Créer des Vues partagées](https://help.formality.com/setup-permissions/shared-views.md): Créez des Vues partagées pour que la plateforme soit le plus utile possible à chaque équipe en fonction de leurs priorités.
+- [Historique & audit trail](https://help.formality.com/setup-permissions/changes-audit-trail.md): La transparence est au cœur de Formality. Pour aider les équipes à garder le contrôle, deux fonctionnalités complémentaires existent : la Piste d’audit et l’Historique des modifications.
+- [Garder la main sur la sécurité, les intégrations et les accès](https://help.formality.com/setup-permissions/admin-badges.md): Le badge Administrateur système donne accès en édition à la sécurité, aux intégrations, aux utilisateurs et aux groupes, indépendamment de la licence. Découvrez son paramétrage.
+- [Vues, Agent, Recherche : quand utiliser quoi ?](https://help.formality.com/find/search-options.md): Dans Formality, vous disposez de trois manières complémentaires pour accéder à l’information : les Vues, l’Agent et la Recherche. Chacune répond à un besoin précis.
+- [Agent : trouvez les réponses à vos questions contractuelles](https://help.formality.com/find/assistant.md): Accédez en quelques secondes aux informations clés de vos contrats, directement depuis la plateforme ou vos outils de travail quotidiens.
+- [Actions disponibles avec l’Agent](https://help.formality.com/find/assistant-actions.md): Découvrez comment interagir avec les réponses de l’Agent : copier du contenu, télécharger un tableau, afficher les sources ou partager un retour pour aider à améliorer la qualité des réponses.
+- [Bonnes pratiques avec l'Agent](https://help.formality.com/find/best-practices-agent.md)
+- [Comprendre un accord, une entité ou un actif en un coup d'œil](https://help.formality.com/find/summary-sheet.md): Les fiches synthétiques résument les informations principales d'un objet sur Formality. Découvrez leur rôle et la manière dont vous pouvez les utiliser.
+- [Comment ajouter, supprimer ou modifier une source](https://help.formality.com/comment-ajouter-supprimer-ou-modifier-une-source.md): Gérez les sources de vos fiches synthétiques en quelques clics pour garder vos informations traçables, à jour et fiables.
+- [Partager des retours & demandes de fonctionnalités](https://help.formality.com/faq/feedback.md)
+- [Je ne trouve pas l'Accord/la Partie que je cherche](https://help.formality.com/faq/no-result.md)
+- [Je n'arrive pas à ajouter un document sur la plateforme](https://help.formality.com/faq/cant-add-document.md)
+- [Comment fonctionne l'Extraction automatique ?](https://help.formality.com/faq/metadata-extraction.md)
+- [Je n'arrive pas à modifier un élément](https://help.formality.com/faq/cant-edit.md)
+- [Je n'arrive pas à supprimer un type d'Accord](https://help.formality.com/faq/cant-delete-agreement-type.md)
+- [Intégrations eSignature : Que faire si un document signé n’apparaît pas dans Formality ?](https://help.formality.com/faq/esignature-faq.md)
+- [FAQ intégration Slack/Teams](https://help.formality.com/faq/messaging-tools-faq.md)
+- [Qu'est-ce qu'une Contrepartie ?](https://help.formality.com/directory/external-entity.md)
+- [Qu'est-ce qu'un Contact ?](https://help.formality.com/directory/contacts.md)
+- [Personnaliser votre répertoire](https://help.formality.com/personnaliser-votre-repertoire.md)
+- [Intégration Docusign](https://help.formality.com/integrations/docusign.md): Profitez de processus efficaces, fiables et conformes grâce à l’import automatique de contrats signés et à la validation des métadonnées !
+- [Intégration HubSpot](https://help.formality.com/integrations/hubspot.md): Offrez à vos équipes un accès en temps réel aux détails des contrats  directement depuis HubSpot !
+- [Intégration Microsoft](https://help.formality.com/integrations/microsoft.md): Reliez votre environnement Microsoft à Formality pour un accès fluide à vos contrats et à la gestion de vos documents dans vos outils Microsoft préférés
+- [Intégration Microsoft Teams](https://help.formality.com/integrations/teams.md): Accédez à l’Agent Formality depuis Microsoft Teams, posez vos questions et gérez vos documents sans changer d’application !
+- [Intégration Outlook Add-in - When available on store](https://help.formality.com/integrations/outlook.md): Connectez vos e-mails à vos documents : ajoutez des pièces jointes d’e-mails et gérez vos documents sans changer d’application !
+- [Intégration Outlook - Ajout manuel de l'add-in](https://help.formality.com/integrations/outlook-1.md): Connectez vos e-mails à vos documents : ajoutez des pièces jointes d’e-mails et gérez vos documents sans changer d’application !
+- [Intégration Salesforce](https://help.formality.com/integrations/integration-salesforce.md)
+- [Intégration SharePoint](https://help.formality.com/integrations/sharepoint.md): Formality importe et enrichit automatiquement vos fichiers SharePoint pour que vos documents  restent à jour, au même endroit, sans chargement manuel.
+- [Intégration Slack](https://help.formality.com/integrations/slack.md): Gardez votre équipe informée et productive grâce à un accès direct à vos contrats et à l’Agent Formality, sans quitter Slack !
+- [Intégration Universign](https://help.formality.com/integrations/universign.md): Profitez de processus efficaces, fiables et conformes grâce au dépôt automatique de vos contrats et à la validation des métadonnées !
+- [Intégration Yousign](https://help.formality.com/integrations/yousign.md): Profitez de processus efficaces, fiables et conformes grâce au dépôt automatique de vos contrats et à la validation des métadonnées !
+- [Add-in Microsoft Word](https://help.formality.com/integrations/word.md): L'add-in Microsoft Word relie Word à Formality : ouvrez vos documents Formality dans Word, travaillez dessus, puis réenregistrez-les dans Formality sans changer d'outil.
+- [Intégrer Formality dans votre environnement Office 365](https://help.formality.com/integrations/o365.md): Bienvenue sur Formality ! Pour garantir une expérience fluide et sécurisée, suivez ces étapes afin d’intégrer Formality à votre environnement Office 365.
+- [Activer le Single Sign-On (SSO) Microsoft pour votre organisation](https://help.formality.com/integrations/activer-le-single-sign-on-sso-microsoft-pour-votre-organisation.md)
+- [Formality API Client Documentation](https://help.formality.com/integrations/api.md): The Formality API Client allows you to interact with the Formality API efficiently, providing endpoints to manage agreements, counterparties, and related entities within a given workspace.
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://help.formality.com/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

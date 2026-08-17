@@ -1,0 +1,62 @@
+generated: '2026-08-17'
+method: searched
+source: live probes of every Formality host on 2026-08-17
+hosts_probed:
+- https://www.formality.com
+- https://formality.com
+- https://app.eu1.formality.com
+- https://app.fr1.formality.com
+- https://api.eu1.formality.com
+- https://api.fr1.formality.com
+- https://auth.eu1.formality.com
+- https://help.formality.com
+documents:
+- path: /.well-known/security.txt
+  status: 200
+  file: formality-security.txt
+  host: https://www.formality.com
+  content_type: text/plain
+  served_from: AmazonS3 via CloudFront
+  last_modified: '2026-07-28'
+  note: >-
+    RFC 9116. A real 100-byte document, served identically from www.formality.com,
+    formality.com, app.eu1, app.fr1 and auth.eu1 (one S3 object behind the shared
+    CloudFront distribution). Declares Contact and Preferred-Languages and does not
+    expire until 2029-12-31.
+- path: /.well-known/openid-configuration
+  status: 404
+  host: https://auth.eu1.formality.com
+- path: /.well-known/oauth-authorization-server
+  status: 404
+  host: https://auth.eu1.formality.com
+- path: /.well-known/oauth-protected-resource
+  status: 404
+  host: https://api.eu1.formality.com
+- path: /.well-known/api-catalog
+  status: 404
+  host: https://auth.eu1.formality.com
+- path: /.well-known/ai-plugin.json
+  status: 404
+  host: https://api.eu1.formality.com
+- path: /.well-known/agent-card.json
+  status: 404
+  host: https://auth.eu1.formality.com
+- path: /.well-known/agent.json
+  status: 404
+  host: https://auth.eu1.formality.com
+notes: >-
+  ONE real document was found: /.well-known/security.txt. It is served with HTTP 200
+  and content-type text/plain from the marketing origin and from every application
+  host, so the WellKnown and SecurityTxt pointers in apis.yml are backed by an
+  observed document rather than an inferred one.
+
+  A soft-200 trap was ruled out explicitly. The single-page application hosts
+  app.eu1.formality.com and app.fr1.formality.com answer HTTP 200 with a 14KB
+  text/html Next.js shell for EVERY /.well-known/* path AND for /openapi.json,
+  /swagger.json, /graphql and /llms.txt. Those 200s are catch-all SPA responses, not
+  documents, and are recorded here as misses. The genuine 404s above were taken from
+  auth.eu1.formality.com and api.eu1.formality.com, which return real status codes.
+
+  No OAuth/OIDC discovery metadata is published even though the platform runs
+  Google and Microsoft SSO, so authentication/ had to be built from the help centre
+  rather than from machine-readable metadata.

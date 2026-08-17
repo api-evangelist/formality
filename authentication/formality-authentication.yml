@@ -1,0 +1,115 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/integrations/api
+docs: https://help.formality.com/integrations/api
+note: >-
+  Derived by hand from the help centre, not from an OpenAPI document. Formality
+  publishes a Swagger UI at https://app.eu1.formality.com/-/api-doc-swagger but it
+  HTTP 302s to https://auth.eu1.formality.com/?callbackUrl=..., and
+  /api/v1/openapi.json and /api/v1/swagger.json both return 401, so no
+  securitySchemes block could be read. Everything below is stated verbatim in
+  Formality's own API documentation.
+summary:
+  types: [http]
+  api_key_in: []
+  oauth2_flows: []
+  scheme: bearer
+  token_exchange: true
+  end_user_sso: [Google, Microsoft]
+schemes:
+- name: refreshToken
+  type: http
+  scheme: bearer
+  role: credential
+  in: header
+  header: Authorization
+  format: 'Authorization: Bearer <your-refresh-token>'
+  issued_by: Personal Settings > Formality API > New Token
+  lifetime: operator-chosen, "from a few days to a full year"
+  revocable: true
+  shown_once: true
+  usage_visibility: >-
+    The token list shows when and where each token was last used.
+  sources: [https://help.formality.com/integrations/api]
+  note: >-
+    A long-lived PERSONAL refresh token. It is not used to call resource endpoints;
+    its only documented purpose is to be exchanged at GET /api/v1/token for a
+    short-lived access token. Because it is minted per user in Personal Settings, an
+    integration inherits that individual's permissions — Formality documents no
+    separate service-account or machine credential.
+- name: accessToken
+  type: http
+  scheme: bearer
+  role: access
+  in: header
+  header: Authorization
+  format: 'Authorization: Bearer <your-access-token>'
+  obtained_from: GET /api/v1/token
+  lifetime_seconds: 300
+  lifetime_note: >-
+    "The access token has a lifespan of 5 minutes, once expired you'll need to
+    generate a new one." No refresh-token rotation, expiry hint or Retry-After style
+    signal is documented, so a client must either re-exchange before every call or
+    handle a 401 and retry.
+  response_shape: '{"token": "<access token>"}'
+  sources: [https://help.formality.com/integrations/api]
+flow:
+  style: two-step bearer exchange
+  steps:
+  - step: 1
+    action: Create a personal Refresh Token in Personal Settings > Formality API
+    note: The full token is displayed only once at creation.
+  - step: 2
+    action: 'GET /api/v1/token with header: Authorization: Bearer <refresh-token>'
+    returns: 'JSON body {"token": "..."} containing the 5-minute access token'
+  - step: 3
+    action: 'Call resource endpoints with Authorization: Bearer <access-token>'
+scoping:
+  model: workspace-path
+  note: >-
+    Authorization is scoped by the workspaceId path segment rather than by token
+    scopes. The workspaceId is the slug that follows the application host in the app
+    URL (app URL .../myCompany/agreements => workspaceId "myCompany"), and it is a
+    required segment of every resource path. There is no OAuth authorization server,
+    no scope vocabulary and no consent screen, which is why scopes/ was deliberately
+    not written for this provider.
+end_user_authentication:
+  sso: [Microsoft, Google]
+  magic_link: true
+  enforce_sso_toggle: true
+  enforce_sso_note: >-
+    An "Imposer la connexion SSO" toggle in workspace Security settings blocks
+    magic-link sign-in and terminates existing non-SSO sessions, forcing
+    re-authentication through Google or Microsoft.
+  allowed_email_domains: true
+  source: https://help.formality.com/setup-permissions/user-management
+  note: >-
+    This is human sign-in to the application, NOT API authentication. It is recorded
+    because the Swagger UI is gated behind it.
+observed_behaviour:
+- url: https://app.eu1.formality.com/api/v1/token
+  status: 401
+  fetched: '2026-08-17'
+- url: https://app.eu1.formality.com/api/v1/demo/agreements
+  status: 401
+  fetched: '2026-08-17'
+- url: https://app.eu1.formality.com/api/v1/openapi.json
+  status: 401
+  fetched: '2026-08-17'
+- url: https://app.eu1.formality.com/-/api-doc-swagger
+  status: 302
+  location: https://auth.eu1.formality.com?callbackUrl=https://app.eu1.formality.com/-/api-doc-swagger
+  fetched: '2026-08-17'
+caveat: >-
+  The 401 responses above are a BLANKET gate, not endpoint confirmation: a
+  deliberately nonsensical path
+  (/api/v1/nonexistentgarbagexyz/zzznotreal) also returns 401 with the same 17-byte
+  "401 Unauthorized" body. Unauthenticated probing therefore proves the /api/v1/
+  surface is live and auth-gated, but it cannot confirm which individual endpoints
+  exist. Every endpoint recorded in this repo comes from Formality's published
+  documentation, not from probe inference.
+gaps:
+- No OpenAPI/Swagger document is reachable without a session.
+- No /.well-known/openid-configuration or oauth-authorization-server is served.
+- No documented token-rotation, key-prefix or sandbox-vs-live credential separation.
+- No documented rate limit or 429 behaviour on the token-exchange endpoint.

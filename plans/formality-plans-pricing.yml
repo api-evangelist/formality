@@ -1,0 +1,63 @@
+generated: '2026-08-17'
+method: searched
+source: https://www.formality.com/en/index.html
+plan_count: 0
+plans: []
+currency: null
+note: >-
+  SEARCHED and honestly zero. Formality publishes NO pricing page and NO named tiers.
+  There is no /pricing or /en/pricing route (both return HTTP 403 from the S3/Framer
+  origin, i.e. the path does not exist), the marketing sitemap contains only eight
+  URLs and none of them is a pricing page, and the site navigation offers Use cases /
+  Platform / Testimonials / Security with a single "Let's talk" call to action.
+pricing_model:
+  documented: true
+  basis: document-volume
+  statement_verbatim: >-
+    "Formality is billed solely on document volume, with unlimited users on every
+    plan. No per-seat cost, no per-team limit."
+  statement_source: https://www.formality.com/en/index.html
+  statement_location: FAQ, "What is Formality's pricing model?"
+  seats: unlimited
+  per_seat_cost: false
+  per_team_limit: false
+  volume_tiers_published: false
+  unit_price_published: false
+  note: >-
+    The pricing MODEL is stated plainly; the pricing NUMBERS are not. No document
+    volume bands, no unit price per document, no currency, no minimum commitment and
+    no billing period are published, so a buyer cannot estimate cost without
+    contacting sales. The phrase "on every plan" implies plans exist but none is
+    named.
+access:
+  self_serve_signup: false
+  free_tier: false
+  free_trial: false
+  pilot_available: true
+  pilot_statement_verbatim: >-
+    "Yes. As discussions progress, Formality can set up a real-world pilot based on
+    your contracts."
+  onboarding: sales-led
+  call_to_action: "Let's talk"
+  contact: contact@formality.co
+  note: >-
+    There is no sign-up form, no self-serve trial and no public console. The only
+    entry point is a 30-minute sales conversation, so API access is reachable only
+    after becoming a customer. A pilot on the customer's own contracts substitutes
+    for a sandbox.
+api_pricing:
+  metered: false
+  documented: false
+  note: >-
+    Nothing states whether API calls, webhook deliveries or agent/MCP access are
+    included in the document-volume price or billed separately. Given that billing is
+    per document rather than per call, API usage is most likely included, but that is
+    not published and is not asserted here.
+target_segment:
+  employees: 50-1000
+  sectors_named: [real estate, infrastructure, healthcare, finance, SaaS, energy]
+  source: https://www.formality.com/en/index.html
+gaps_worth_raising_with_provider:
+- Publish document-volume bands and a unit price, or a "from" price.
+- Name the plans referred to by "every plan".
+- State whether API and webhook usage is metered.

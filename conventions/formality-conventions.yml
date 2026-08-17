@@ -1,0 +1,125 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/integrations/api
+docs: https://help.formality.com/integrations/api
+note: >-
+  Cross-cutting runtime semantics for the Formality API, read from the help centre.
+  No OpenAPI was reachable (see authentication/formality-authentication.yml), so
+  fields that a spec would normally supply are recorded as not-documented rather than
+  inferred.
+authentication:
+  style: bearer
+  header: Authorization
+  value: Bearer <access-token>
+  exchange: GET /api/v1/token with the refresh token as bearer
+  access_token_ttl_seconds: 300
+  see: authentication/formality-authentication.yml
+base_url:
+  template: https://app.eu1.formality.com/api/v1/{workspaceId}
+  documented_template: https://app.formality.com/api/v1/{workspaceId}/
+  documented_host_resolves: false
+  regions:
+  - {region: eu1, host: app.eu1.formality.com, location: Ireland / EU}
+  - {region: fr1, host: app.fr1.formality.com, location: France (Scaleway)}
+  note: >-
+    Multi-tenant AND multi-region. Every path carries a required {workspaceId}
+    segment, and the workspace lives in exactly one region, so a client must know
+    both its workspace slug and its region host. The documented generic host
+    app.formality.com does not resolve in DNS as of 2026-08-17.
+versioning:
+  scheme: uri-path
+  current: v1
+  position: /api/v1/...
+  header_negotiation: false
+  date_versioning: false
+  documented_policy: null
+  note: >-
+    v1 appears in every documented path. Formality publishes no versioning policy,
+    no version-support window and no changelog, so a consumer has no published
+    signal for how or when v1 would change.
+pagination:
+  documented: false
+  note: >-
+    Not documented. The single published response example returns a bare
+    {"agreements": [...]} envelope with no cursor, page, offset, limit, total or
+    next-link field, and no query parameters are documented. Collection endpoints
+    such as /agreements exist on a contract repository that can hold thousands of
+    documents, so pagination almost certainly exists in the gated Swagger UI; it is
+    simply not published.
+filtering:
+  documented: false
+sorting:
+  documented: false
+field_expansion:
+  documented: false
+sparse_fieldsets:
+  documented: false
+metadata:
+  documented: true
+  note: >-
+    Not an API-level metadata bag but the product's core concept: the AI-extracted
+    "metadata layer" over each contract, validated by humans, is what the API is
+    built to expose. Formality markets this as the reason agents never re-read source
+    documents.
+request_tracing:
+  request_id_header: null
+  documented: false
+idempotency:
+  supported: false
+  documented: false
+  header: null
+  note: >-
+    NO idempotency contract is documented. Only GET operations are documented
+    (/token, /agreements, /agreementFields), and while the docs say requests "should
+    be made using the correct HTTP methods (GET, POST, PUT, DELETE)", no write
+    operation, request body, idempotency key or retry-safety rule is published.
+    Because of this, NO Idempotency pointer is emitted in apis.yml — see the note in
+    that file. This is an honest absence, not an unchecked field.
+rate_limiting:
+  documented: false
+  headers: []
+  see: rate-limits/formality-rate-limits.yml
+error_envelope:
+  format: undocumented
+  problem_json: false
+  documented_statuses: [401, 403, 404, 500]
+  note: >-
+    Errors are documented only as a four-row status-code table with prose meanings.
+    No error body shape, machine-readable code, or application/problem+json media
+    type is published. Observed unauthenticated responses return a plain-text
+    17-byte "401 Unauthorized" body with content-type text/plain, not JSON.
+  see: errors/formality-problem-types.yml
+content_type:
+  request: application/json
+  response: application/json
+  note: '"API responses are returned in JSON format."'
+identifiers:
+  style: opaque string
+  example: cm7ymby3b0009uh08ytb7zo
+  prefixed: false
+  note: >-
+    The published agreement id looks like a cuid2-style opaque token with no type
+    prefix, so an id does not self-describe its resource type.
+webhooks:
+  supported: true
+  signing: HMAC-SHA256
+  see: asyncapi/formality-webhooks.yml
+agent_posture:
+  vendor_claim: >-
+    "Designed for AI agents. Formality structures your contract data in a format
+    your AI agents can read. Secure connection via API/MCP." Plus "+ 130 contract
+    tools for your AI agents" on the homepage.
+  claim_source: https://www.formality.com/en/index.html
+  verified: false
+  note: >-
+    The API/MCP claim could not be verified from any public surface. See
+    mcp/formality-mcp.yml for the endpoints probed. The 5-minute access-token TTL is
+    the most agent-relevant published constraint: an autonomous client must
+    re-exchange its refresh token roughly every 5 minutes.
+gaps_worth_raising_with_provider:
+- Publish the OpenAPI document, or at least an unauthenticated copy of the Swagger JSON.
+- Correct the documented base URL — app.formality.com does not resolve.
+- Document pagination on collection endpoints.
+- Document the error body shape, not just the status codes.
+- Document rate limits and the 429 response.
+- State whether writes are supported and whether they are idempotent.

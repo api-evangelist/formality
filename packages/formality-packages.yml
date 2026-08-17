@@ -1,0 +1,63 @@
+generated: '2026-08-17'
+method: searched
+source: >-
+  registry.npmjs.org search + name probes, pypi.org/pypi/<name>/json, and
+  https://help.formality.com/integrations/api
+package_count: 0
+official_package_count: 0
+packages: []
+note: >-
+  SEARCHED and genuinely EMPTY. Formality ships no first-party client library in any
+  registry, and its own API documentation confirms this by implication: the published
+  integration path is raw HTTP via Postman or curl, with hand-rolled bearer headers
+  and no SDK mentioned anywhere.
+
+  Because "formality" is a common English word, this search produced a large crop of
+  false positives that a future run should not mistake for first-party SDKs. Every
+  npm hit belongs to an unrelated project, and none reference formality.com:
+    - formality, formality-lang, formality-js, formality-core, formality-temporary,
+      formality-loader, formality-to-nasic, new-formality-lang  -> the "Formality"
+      dependently-typed proof language (github.com/moonad), last published 2018-2021
+    - @formality-ui/react, @formality-ui/core, re-formality, react-formality,
+      ng-formality, @thinmartian/formality  -> unrelated form-validation libraries
+    - @cards-against-formality/*  -> a card game
+  PyPI: the name "formality" is taken (HTTP 200) but by an unrelated project;
+  formality-api and formality-sdk are both 404.
+
+  No GitHub organisation exists either: api.github.com/orgs/formality returns 404,
+  and no repository was found publishing a Formality client.
+registries_checked:
+- {registry: npm, method: search + direct name probe, result: no first-party package}
+- {registry: pypi, method: direct name probe, result: no first-party package}
+- {registry: github, method: org lookup, result: 404 - no organisation}
+names_probed:
+- {name: '@formality/sdk', registry: npm, status: 404, version: null}
+- {name: '@formality/client', registry: npm, status: 404, version: null}
+- {name: '@formality/api-client', registry: npm, status: 404, version: null}
+- {name: formality-sdk, registry: npm, status: 404, version: null}
+- {name: formality-client, registry: npm, status: 404, version: null}
+- {name: formality-api, registry: pypi, status: 404, version: null}
+- {name: formality-sdk, registry: pypi, status: 404, version: null}
+client_side_distributions:
+  note: >-
+    Formality does ship customer-facing client software, but through application
+    marketplaces rather than package registries, so none of it has a version endpoint
+    to query. These are end-user add-ins, NOT developer SDKs, and are recorded here
+    only so a later run does not re-hunt them as packages.
+  items:
+  - {name: Microsoft Word add-in, channel: Microsoft add-in, version: null, published: null,
+     docs: https://help.formality.com/integrations/word,
+     note: No registry or marketplace listing URL is published; version unknown.}
+  - {name: Outlook add-in, channel: Microsoft add-in, version: null, published: null,
+     docs: https://help.formality.com/integrations/outlook,
+     note: 'Help centre title reads "Outlook Add-in - When available on store", and a
+       separate page documents manual sideloading, so as of 2026-08-17 it is not
+       generally available on the store.'}
+  - {name: Microsoft Teams app, channel: Microsoft Teams, version: null, published: null,
+     docs: https://help.formality.com/integrations/teams}
+  - {name: Slack app, channel: Slack, version: null, published: null,
+     docs: https://help.formality.com/integrations/slack}
+sdk_pointer_emitted: false
+sdk_pointer_reason: >-
+  No official client library exists, so NO type:SDKs pointer was added to apis.yml.
+  Emitting one would credit Formality with SDK coverage it does not ship.

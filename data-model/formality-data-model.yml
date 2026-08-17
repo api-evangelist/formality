@@ -1,0 +1,166 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/integrations/api
+docs:
+- https://help.formality.com/integrations/api
+- https://help.formality.com/agreements/definition
+- https://help.formality.com/directory/external-entity
+- https://help.formality.com/directory/contacts
+- https://help.formality.com/entities/create-entity
+- https://help.formality.com/assets/definition
+- https://help.formality.com/assets/relations
+note: >-
+  DERIVED FROM DOCUMENTATION, NOT FROM A SPEC. No OpenAPI was reachable, so this
+  entity graph was read from the help centre's object-definition pages plus the API
+  page's own scope statement ("endpoints to manage agreements, counterparties, and
+  related entities within a given workspace"). The API page also embeds an "Objects
+  relationship" diagram, but it is a bitmap (/files/Qtg4qGFYPCcELdKQMGhe) and could
+  not be parsed, so relationships below come from prose. Field-level schemas,
+  required/optional flags and types are NOT published and have not been invented:
+  only the fields Formality names explicitly appear here.
+root: workspace
+root_note: >-
+  Everything is scoped to a workspace. The workspaceId is a required path segment on
+  every API call and is the slug shown after the application host in the app URL.
+identifiers:
+  style: opaque
+  prefixed: false
+  example: cm7ymby3b0009uh08ytb7zo
+  note: >-
+    cuid2-shaped. Ids do not encode their type, so a client cannot tell an agreement
+    id from an entity id by inspection.
+entities:
+- name: Agreement
+  documented_as: Accord
+  api_resource: agreements
+  api_confirmed: true
+  endpoint: GET /api/v1/{workspaceId}/agreements
+  description: >-
+    The central object: an envelope grouping every document tied to one contractual
+    project or relationship — the main contract, its amendments (avenants) and its
+    annexes — plus the AI-extracted summary sheet.
+  documented_fields:
+  - {name: id, seen_in: published response example}
+  - {name: name, seen_in: published response example}
+  - {name: status, seen_in: published response example, example_value: active}
+  note: >-
+    Only three fields appear in the one published response example. The real object
+    is far richer (custom fields, categories, sections, permissions, snapshots,
+    deadlines) but none of that is published field-by-field.
+- name: AgreementField
+  documented_as: Champs / Propriétés d'Accord
+  api_resource: agreementFields
+  api_confirmed: true
+  endpoint: GET /api/v1/{workspaceId}/agreementFields
+  description: >-
+    The custom-field definitions (metadata schema) applied to agreements — the
+    structure behind the AI-extracted summary sheet. Fields are grouped into
+    categories and sections and can be dates, amounts, dropdowns or text.
+  documented_fields: []
+  note: >-
+    This is the schema-describing endpoint. It is what makes the API usable by an
+    agent: it tells a client which extracted metadata keys exist in this workspace
+    before it reads agreements. No response shape is published.
+- name: Counterparty
+  documented_as: Contrepartie / Partie
+  api_resource: null
+  api_confirmed: false
+  api_note: >-
+    Named in the API page's scope sentence ("agreements, counterparties, and related
+    entities") but no counterparty endpoint or path is published.
+  description: >-
+    A party to a contract, internal or external, carrying a role — owner, operator,
+    lessor, lessee, subcontractor, supplier, customer, or a custom role.
+  documented_fields:
+  - {name: role, values_documented: [Interne, Externe, Bailleur, Locataire, custom]}
+  - {name: contact details, documented_as: coordonnées}
+  - {name: represented entity, documented_as: entité représentée}
+- name: ManagedEntity
+  documented_as: Entité gérée
+  api_resource: null
+  api_confirmed: false
+  description: >-
+    A legal company within the customer's own group — the legal backbone of the
+    workspace. Its stored legal data (share capital, registered office, officers)
+    feeds contract templates automatically.
+  documented_fields:
+  - {name: legal name, documented_as: Nom légal, note: must match the official register exactly}
+  - {name: share capital, documented_as: capital}
+  - {name: registered office, documented_as: siège social}
+  - {name: officers, documented_as: dirigeants}
+  admin_only_create: true
+- name: Contact
+  documented_as: Contact
+  api_resource: null
+  api_confirmed: false
+  description: >-
+    A person recorded in the workspace — internal staff, a client/supplier/partner
+    representative, or an officer tied to an entity.
+  documented_fields:
+  - {name: name}
+  - {name: email}
+  permission_note: >-
+    A contact with no linked entity is visible to all workspace users; a contact
+    attached to an entity INHERITS that entity's permissions. This is the clearest
+    documented permission-inheritance rule in the model and matters for any API
+    client, because a token only sees what its owner's groups allow.
+  sub_objects:
+  - {name: Delegation of powers, documented_as: Délégation de pouvoirs}
+  - {name: Board mandates, documented_as: Mandats liés au conseil d'administration}
+- name: Asset
+  documented_as: Actif
+  api_resource: null
+  api_confirmed: false
+  description: >-
+    A physical thing the business runs — a production site, power plant, warehouse,
+    concession, power line, EV charge point or data centre — linking legal and
+    contractual data to the field.
+  documented_fields:
+  - {name: address, note: used to place the asset on the interactive map}
+  - {name: custom fields, documented_as: champs personnalisés}
+- name: Folder
+  documented_as: Dossier
+  api_resource: null
+  api_confirmed: false
+  description: A hierarchical tree for organising documents; shareable with external users.
+- name: Template
+  documented_as: Trame de contrat
+  api_resource: null
+  api_confirmed: false
+  description: >-
+    An approved contract template with variable fields, auto-populated from
+    ManagedEntity legal data.
+- name: Clause
+  documented_as: Clause (Bibliothèque de clauses)
+  api_resource: null
+  api_confirmed: false
+  description: A standardised reusable contractual clause in the clause library.
+relationships:
+- {from: Workspace, to: Agreement, type: has_many, via: workspaceId path segment, confidence: high}
+- {from: Workspace, to: AgreementField, type: has_many, via: workspaceId path segment, confidence: high}
+- {from: Agreement, to: AgreementField, type: has_many, via: field definitions applied to the agreement, confidence: high}
+- {from: Agreement, to: Agreement, type: has_many, via: amendments (avenants) and annexes inside the envelope, confidence: high,
+   note: 'Self-referencing: Formality auto-detects that a new document amends an existing contract.'}
+- {from: Agreement, to: Counterparty, type: has_many, via: parties with roles, confidence: high}
+- {from: Counterparty, to: Agreement, type: has_many, via: the party record lists every linked agreement, confidence: high}
+- {from: Agreement, to: ManagedEntity, type: belongs_to, via: the legal structure the agreement is attached to, confidence: high}
+- {from: ManagedEntity, to: Contact, type: has_many, via: officers/representatives; contact inherits entity permissions, confidence: high}
+- {from: Asset, to: ManagedEntity, type: has_many, via: links to subsidiaries / project vehicles / operators, confidence: high}
+- {from: Asset, to: Agreement, type: has_many, via: associated maintenance, operating, lease, supply and partnership contracts, confidence: high}
+- {from: Agreement, to: Folder, type: belongs_to, via: folder tree placement, confidence: medium}
+- {from: Template, to: ManagedEntity, type: belongs_to, via: template variables resolved from entity legal data, confidence: high}
+- {from: Contact, to: Counterparty, type: belongs_to, via: representative of the party's entity, confidence: medium}
+coverage:
+  entities_documented: 9
+  entities_exposed_via_documented_endpoint: 2
+  note: >-
+    Nine first-class objects are described in the help centre; only two — agreements
+    and agreementFields — have a published API path. The gap is the single biggest
+    finding in this artifact: the documented API is a read window onto the contract
+    metadata layer, not full CRUD over the object model, even though the help centre
+    claims coverage of counterparties and related entities.
+render: null
+gaps:
+- No published field schemas for any entity.
+- The "Objects relationship" diagram is a bitmap, not machine-readable.
+- Counterparty/entity endpoints are claimed in prose but never named.

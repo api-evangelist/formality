@@ -1,0 +1,87 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/setup-permissions/user-management
+docs: https://help.formality.com/setup-permissions/user-management
+spec_type: none
+asyncapi_published: false
+note: >-
+  Formality documents a real, signed webhook surface but publishes NO AsyncAPI
+  document, so this file carries the webhook catalogue and apis.yml gets a Webhooks
+  pointer only — no AsyncAPI pointer. The webhook is documented in the "Webhook de
+  téléchargement de documents" section of the French user-management help page; there
+  is no dedicated webhook reference page and no English version was found. Formality
+  also advertises webhooks on its marketing FAQ: "An API and webhooks are also
+  available for your in-house tools."
+delivery:
+  style: http-post-callback
+  subscriber_configured: true
+  configured_in: Workspace Settings > Security (admin only)
+  endpoint_owner: customer
+  test_tooling:
+    available: true
+    control: '"Tester le webhook" button'
+    note: Validates that the configured endpoint is reachable.
+security:
+  signing: HMAC-SHA256
+  signature_header: undocumented
+  secret_distribution: undocumented
+  replay_protection: undocumented
+  note: >-
+    Payloads are stated to be signed with HMAC-SHA256, which is the single strongest
+    piece of event-surface engineering Formality publishes. The header carrying the
+    signature, the shared-secret provisioning mechanism and any timestamp/nonce
+    replay window are all undocumented, so a consumer cannot actually implement
+    verification from the published docs alone.
+scope:
+  domain: document access + signature audit events
+  purpose: security / audit trail
+  note: >-
+    This is an AUDIT webhook, not a contract-lifecycle webhook. It reports who
+    touched a document, not that an agreement changed state. There is no documented
+    event for agreement created/updated, deadline reached, obligation triggered,
+    extraction completed or workflow approved — which is the event set an
+    integrator would most expect from a CLM platform.
+events:
+- event: document_viewed
+  documented_as: consultation de document
+  trigger: A user views a document.
+- event: document_downloaded
+  documented_as: téléchargement de document
+  trigger: A user downloads a document.
+- event: document_bulk_downloaded
+  documented_as: téléchargement groupé
+  trigger: A user performs a bulk download.
+- event: document_signed
+  documented_as: signature de document
+  trigger: A document is signed.
+payload:
+  documented_fields:
+  - name: timestamp
+    documented_as: horodatage
+  - name: user
+    documented_as: utilisateur
+  - name: ip_address
+    documented_as: adresse IP
+  - name: event_type
+    documented_as: type d'événement
+  - name: file
+    documented_as: informations du fichier
+  schema_published: false
+  example_published: false
+  field_types_published: false
+  note: >-
+    Field NAMES above are our English renderings of the French prose list; the
+    literal JSON keys, their types and an example payload are not published. No
+    schema was fabricated for this reason.
+retries:
+  documented: false
+delivery_guarantees:
+  documented: false
+event_count: 4
+gaps_worth_raising_with_provider:
+- Publish the JSON payload schema and an example event.
+- Name the HMAC signature header and document the replay window.
+- Document retry/backoff and delivery guarantees.
+- Consider contract-lifecycle events (agreement state change, deadline, extraction complete).
+- Publish an AsyncAPI document for the event surface.
+- Provide an English version of the webhook documentation.

@@ -1,0 +1,37 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/integrations/api
+limit_count: 0
+limits: []
+headers: []
+exhaustion_status: null
+retry_after: null
+note: >-
+  SEARCHED and honestly zero. Formality documents NO rate limits. The full help centre
+  corpus was searched for rate limit / rate-limit / quota / throttle / 429 (via the
+  provider's own llms-full.txt export, 238KB covering every page) and there is not one
+  occurrence. The API page's error table stops at 401/403/404/500 with no 429 row, and
+  no X-RateLimit-*, RateLimit-* or Retry-After header is described anywhere.
+probe:
+  attempted: true
+  observable: false
+  note: >-
+    Limits could not be observed live either. Every request to
+    https://app.eu1.formality.com/api/v1/... returns 401 before any quota accounting,
+    and no rate-limit headers are present on those responses, so there is no
+    unauthenticated path to measure the runtime signal.
+de_facto_constraint:
+  name: access-token TTL
+  value_seconds: 300
+  source: https://help.formality.com/integrations/api
+  note: >-
+    Not a rate limit, but the one published constraint that actually shapes client
+    behaviour: the access token minted at GET /api/v1/token lives 5 minutes. Any
+    long-running or autonomous client must re-exchange its refresh token roughly every
+    5 minutes, which makes the token endpoint the hottest path in any integration —
+    and the one most likely to carry an undocumented limit.
+gaps_worth_raising_with_provider:
+- Publish per-key/per-workspace limits and the window.
+- Return and document RateLimit-* (RFC 9331 style) or X-RateLimit-* headers.
+- Document the 429 response and Retry-After.
+- State whether the token-exchange endpoint has its own tighter limit.

@@ -1,0 +1,160 @@
+generated: '2026-08-17'
+method: searched
+source:
+- https://www.formality.com/en/index.html
+- https://help.formality.com/integrations/api
+- https://www.formality.com/.well-known/security.txt
+note: >-
+  Standards posture assembled from Formality's own published statements plus live
+  probes. No OpenAPI was reachable, so spec-derived assertions (problem+json, declared
+  securitySchemes, OData/JSON:API shapes) are recorded as not-determinable rather than
+  false where the evidence is genuinely absent.
+standards:
+- id: iso-27001
+  conforms: true
+  evidence: >-
+    'CERTIFICATIONS ISO 27001 & SOC 2 Type II, renewed every year.' — published on the
+    Security & sovereignty section of formality.com/en/
+  kind: certification
+  verified: vendor-published
+  note: No certificate number, auditor, scope statement or report is published.
+- id: soc2-type2
+  conforms: true
+  evidence: Same statement as ISO 27001, naming SOC 2 Type II renewed annually.
+  kind: certification
+  verified: vendor-published
+  note: No SOC 2 report or NDA-gated request flow is offered.
+- id: gdpr
+  conforms: true
+  evidence: >-
+    Sovereign EU hosting (France via Scaleway, or Ireland), a published privacy policy
+    and cookie policy, a dedicated privacy@formality.co contact, cookie consent with a
+    13-month maximum retention, and an explicit contractual prohibition on AI providers
+    training on customer data.
+  kind: regulation
+  verified: vendor-published
+  sources:
+  - https://www.formality.com/en/privacy-policy.html
+  - https://www.formality.com/en/cookie-policy.html
+- id: eu-data-residency
+  conforms: true
+  evidence: >-
+    'Sovereign: data stored in Europe or in France (Scaleway).' Confirmed structurally
+    by two separate regional application hosts, app.fr1.formality.com (France) and
+    app.eu1.formality.com (EU/Ireland), both live.
+  kind: sovereignty
+  verified: probed
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: >-
+    https://www.formality.com/.well-known/security.txt returns HTTP 200, text/plain,
+    with Contact, Preferred-Languages and a non-expired Expires field (2029-12-31).
+  kind: specification
+  verified: probed
+  note: >-
+    Minimal but valid. Missing the recommended Policy, Encryption, Acknowledgments and
+    Canonical fields.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json is documented; the error contract is a four-row status
+    table and observed error bodies are 17-byte plain text.
+  kind: specification
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Authentication is a proprietary two-step bearer exchange (personal refresh token ->
+    GET /api/v1/token -> 5-minute access token), not an OAuth 2.0 grant. No
+    authorization endpoint, no scopes, no client registration, and
+    /.well-known/oauth-authorization-server returns 404.
+  kind: specification
+- id: oidc
+  conforms: partial
+  evidence: >-
+    End users sign in through Microsoft and Google SSO, which are OIDC providers, and
+    an enforce-SSO toggle exists. But Formality itself publishes no
+    /.well-known/openid-configuration (404 on auth.eu1.formality.com) and exposes no
+    OIDC surface to API consumers, so it is an OIDC relying party for human login only.
+  kind: specification
+  sources: [https://help.formality.com/setup-permissions/user-management]
+- id: hmac-webhook-signing
+  conforms: true
+  evidence: >-
+    Document-access webhook payloads are stated to be signed with HMAC-SHA256.
+  kind: practice
+  note: The signature header name and replay-protection window are not documented.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    A webhook surface exists (4 document-audit events) but no AsyncAPI document is
+    published.
+  kind: specification
+- id: openapi
+  conforms: not-determinable
+  evidence: >-
+    A Swagger UI is published at /-/api-doc-swagger, which means an OpenAPI/Swagger
+    document almost certainly exists internally, but it 302s to the login host and
+    /api/v1/openapi.json and /api/v1/swagger.json both return 401. Whether the document
+    is OpenAPI 3.x or Swagger 2.0, and whether it is well formed, cannot be determined
+    without a customer session.
+  kind: specification
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or sunset policy is published.
+  kind: specification
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency header or retry-safety contract is documented.
+  kind: practice
+- id: tls13
+  conforms: true
+  evidence: >-
+    'ENCRYPTION AES-256 at rest, TLS 1.3 in transit.' Confirmed by live probe: TLSv1.3
+    negotiated on www, help, app.eu1, app.fr1 and auth.eu1.
+  kind: practice
+  verified: probed
+- id: hsts-preload
+  conforms: partial
+  evidence: >-
+    app.eu1, app.fr1 and auth.eu1 all send max-age=63072000; includeSubDomains;
+    preload. The marketing origin www.formality.com sends NO HSTS header at all after
+    its move to Framer — a regression from the 2026-07-19 probe.
+  kind: practice
+  verified: probed
+- id: dnssec
+  conforms: false
+  evidence: 'dig DS formality.com returns nothing; no DNSSEC.'
+  kind: practice
+  verified: probed
+- id: caa
+  conforms: false
+  evidence: 'dig CAA formality.com returns nothing; no CAA records.'
+  kind: practice
+  verified: probed
+- id: dmarc
+  conforms: partial
+  evidence: 'DMARC record present but policy is p=none, so spoofed mail is not rejected.'
+  kind: practice
+  verified: probed
+- id: one-clause
+  conforms: true
+  evidence: >-
+    'Signatory of One Clause.' — published in the Security & sovereignty section. An
+    industry commitment on contractual clauses, self-declared.
+  kind: commitment
+  verified: vendor-published
+- id: mcp
+  conforms: unverified
+  evidence: >-
+    Formality markets 'Secure connection via API/MCP' and '+ 130 contract tools for
+    your AI agents', but no MCP endpoint, install command, package or documentation
+    page could be found. See mcp/formality-mcp.yml for the endpoints probed.
+  kind: specification
+compliance_pointer_emitted: true
+compliance_pointer_note: >-
+  type:Compliance is emitted because Formality genuinely publishes named
+  certifications (ISO 27001, SOC 2 Type II) on its own site. The pointer URL had to be
+  CORRECTED this round: the previous target
+  https://www.formality.com/en/security now returns HTTP 403 — that page no longer
+  exists after the site was rebuilt on Framer, and the certification claims moved into
+  the #security anchor section of the localised homepage.

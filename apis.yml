@@ -22,19 +22,26 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: contact-sales
+  onboarding: sales-gate
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Customer-only API
+  confidence: medium
+  source:
+  - https://help.formality.com/integrations/api
+  - https://www.formality.com/en/index.html
+  generated: '2026-08-17'
+  method: searched
+  note: >-
+    A documented REST API exists but is reachable only from inside a provisioned
+    Formality workspace: tokens are minted in Personal Settings, the Swagger UI
+    requires login, and the marketing site's only call to action is "Let's talk".
+    Billing is on document volume with no published price list.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-17'
 image: https://framerusercontent.com/images/hEwKjnYt6aQ2PnIpW5a9LjGDmG4.svg
 tags:
 - Company
@@ -45,7 +52,47 @@ tags:
 - Asset Intelligence
 - Compliance
 - SaaS
-apis: []
+apis:
+- aid: formality-api
+  name: Formality API
+  description: >-
+    The Formality REST API exposes the workspace contract repository so external
+    tools and AI agents can retrieve documents and the AI-extracted metadata
+    layer. Every path is namespaced to a workspace — /api/v1/{workspaceId}/ —
+    and the documented resources cover agreements and agreement fields, with the
+    help centre describing coverage of agreements, counterparties and related
+    entities. Access uses a two-step bearer flow: an administrator mints a
+    long-lived personal Refresh Token in Personal Settings > Formality API, then
+    exchanges it at GET /api/v1/token for a 5-minute access token used as
+    Authorization: Bearer on subsequent calls. A Swagger UI is published at
+    /-/api-doc-swagger but is reachable only after authenticating.
+  humanURL: https://help.formality.com/integrations/api
+  baseURL: https://app.eu1.formality.com/api/v1/{workspaceId}
+  tags:
+  - Contract Management
+  - Documents
+  - Legal
+  - Agreements
+  properties:
+  - type: APIReference
+    url: https://help.formality.com/integrations/api
+  - type: Authentication
+    url: authentication/formality-authentication.yml
+  - type: ErrorCatalog
+    url: errors/formality-problem-types.yml
+  - type: Conventions
+    url: conventions/formality-conventions.yml
+  - type: DataModel
+    url: data-model/formality-data-model.yml
+  - type: Webhooks
+    url: asyncapi/formality-webhooks.yml
+  x-base-url-note: >-
+    The help centre publishes the base as https://app.formality.com/api/v1/{workspaceId}/,
+    but app.formality.com does not resolve in DNS (2026-08-17). The live regional
+    application hosts named on Formality's own status page are app.eu1.formality.com
+    (EU/Ireland) and app.fr1.formality.com (France/Scaleway); both answer
+    /api/v1/... with HTTP 401 rather than 404, so the EU host is recorded here and
+    the documented generic host is flagged as a provider-side documentation defect.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -55,19 +102,81 @@ common:
 - type: Website
   url: https://www.formality.com/
 - type: PrivacyPolicy
-  url: https://www.formality.com/policies/personal-data-protection-policy/
+  url: https://www.formality.com/en/privacy-policy.html
+- type: CookiePolicy
+  url: https://www.formality.com/en/cookie-policy.html
+- type: LegalNotice
+  url: https://www.formality.com/en/legal-notice.html
 - type: StatusPage
   url: https://status.formality.com/
 - type: Compliance
-  url: https://www.formality.com/en/security
+  url: https://www.formality.com/en/index.html#security
 - type: TrustCenter
-  url: https://www.formality.com/en/security
+  url: security/formality-trust-center.yml
+- type: Documentation
+  url: https://help.formality.com/
+- type: HelpCenter
+  url: https://help.formality.com/
+- type: APIReference
+  url: https://help.formality.com/integrations/api
+- type: GettingStarted
+  url: https://help.formality.com/start/first-steps
+- type: Support
+  url: https://help.formality.com/faq/feedback
+- type: Login
+  url: https://auth.eu1.formality.com/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/formality-group/
+- type: LLMsTxt
+  url: llms/formality-llms.txt
+- type: WellKnown
+  url: well-known/formality-well-known.yml
+- type: SecurityTxt
+  url: well-known/formality-security.txt
+- type: Security
+  url: https://www.formality.com/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/formality-vulnerability-disclosure.yml
+- type: Authentication
+  url: authentication/formality-authentication.yml
+- type: Conventions
+  url: conventions/formality-conventions.yml
+- type: ErrorCatalog
+  url: errors/formality-problem-types.yml
+- type: DataModel
+  url: data-model/formality-data-model.yml
+- type: Webhooks
+  url: asyncapi/formality-webhooks.yml
+- type: Conformance
+  url: conformance/formality-conformance.yml
+- type: Packages
+  url: packages/formality-packages.yml
+- type: Plans
+  url: plans/formality-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/formality-rate-limits.yml
+- type: Integrations
+  url: https://help.formality.com/setup-permissions/integrations-hub
 - type: Lifecycle
   url: lifecycle/formality-lifecycle.yml
 - type: DomainSecurity
   url: security/formality-domain-security.yml
+x-idempotency-note: >-
+  No type:Idempotency pointer is emitted. conventions/formality-conventions.yml records
+  idempotency as not supported and not documented: only GET operations are published and
+  no idempotency key, write operation or retry-safety rule appears anywhere in
+  Formality's documentation. This is a checked absence, not an oversight.
+x-mcp-note: >-
+  No type:MCPServer pointer is emitted even though Formality's homepage advertises
+  "Secure connection via API/MCP" and "+ 130 contract tools for your AI agents". Six
+  candidate endpoints were probed and none is an MCP server (see mcp/formality-mcp.yml).
+  The marketing claim has no public artifact behind it.
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-17'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Round 2 overturned round 1's "no public REST API" finding. A documented Formality
+    REST API (v1, bearer token exchange, workspace-scoped) was found via the GitBook help
+    centre's own llms.txt index, and three dead apis.yml pointers were repaired.

@@ -1,0 +1,76 @@
+generated: '2026-08-17'
+method: searched
+source: https://help.formality.com/integrations/api
+docs: https://help.formality.com/integrations/api
+format: status-code-table
+problem_json: false
+note: >-
+  SEARCHED from the "Error Handling" section of Formality's API documentation, which
+  publishes a four-row status-code table. This is NOT an RFC 9457 catalogue: no
+  problem type URIs, no error codes, no error body schema and no
+  application/problem+json media type are published. Titles and meanings below are
+  Formality's own wording, quoted verbatim; the remediation column is our reading of
+  that wording and is marked as such.
+envelope:
+  documented: false
+  observed_unauthenticated_body: '401 Unauthorized'
+  observed_content_type: text/plain; charset=utf-8
+  observed_length_bytes: 17
+  note: >-
+    Formality documents no error body. Live unauthenticated calls to
+    https://app.eu1.formality.com/api/v1/... return a 17-byte plain-text body, so an
+    agent cannot parse a machine-readable reason from a failure — it only gets the
+    status code.
+problems:
+- status: 401
+  title: Unauthorized
+  documented_meaning: 'Unauthorized – Check your access rights.'
+  likely_cause_derived: >-
+    Missing, malformed or expired bearer token. Most commonly the 5-minute access
+    token has lapsed and must be re-minted at GET /api/v1/token.
+  remediation_derived: Re-exchange the refresh token for a new access token and retry.
+  retryable: true
+- status: 403
+  title: Forbidden
+  documented_meaning: 'Forbidden – Ensure you have the correct permissions.'
+  likely_cause_derived: >-
+    The token is valid but the owning user lacks permission for the workspace,
+    module or object. Formality permissions are group-based and per-object, so a
+    token inherits exactly the minting user's rights.
+  remediation_derived: >-
+    Have a workspace administrator grant the token owner's group access to the
+    resource; re-minting the token will not help.
+  retryable: false
+- status: 404
+  title: Not Found
+  documented_meaning: 'Not Found – Verify the workspace ID and endpoint.'
+  likely_cause_derived: >-
+    Wrong workspaceId slug, wrong region host, or an endpoint that does not exist.
+  remediation_derived: >-
+    Confirm the workspaceId from the app URL and confirm the workspace's region host
+    (app.eu1 vs app.fr1).
+  retryable: false
+- status: 500
+  title: Internal Server Error
+  documented_meaning: 'Internal Server Error – Contact support if the issue persists.'
+  likely_cause_derived: Server-side fault.
+  remediation_derived: Retry with backoff; escalate to the Customer Success contact if persistent.
+  retryable: true
+undocumented_but_expected:
+- status: 429
+  note: >-
+    No rate-limit or throttling response is documented anywhere in the help centre.
+    Recorded as a gap, not asserted as existing.
+- status: 400
+  note: Validation errors are not documented; no write operations are documented either.
+support_escalation:
+  channel: Customer Success team
+  note: >-
+    The API page closes with "If you run into any issues or have questions about the
+    API, reach out to our Customer Success team." No support email, ticket URL,
+    developer forum or status-page incident link is given on the API page itself.
+gaps:
+- No error body schema.
+- No application-level error codes distinguishable within a status class.
+- No RFC 9457 problem+json.
+- No 429/400 documentation.

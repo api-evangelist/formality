@@ -1,0 +1,100 @@
+generated: '2026-08-17'
+method: derived
+status: candidate
+source: https://help.formality.com/integrations/api
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+note: >-
+  NO MCP SERVER EXISTS as a discoverable product. mode:none, status:candidate, and NO
+  type:MCPServer pointer was added to apis.yml — emitting one would credit Formality
+  with an agent surface it does not publish.
+
+  This matters because Formality ADVERTISES MCP. Its homepage says "Designed for AI
+  agents ... Secure connection via API/MCP" and "+ 130 contract tools for your AI
+  agents". That is a marketing claim with no public artifact behind it: no endpoint
+  URL, no install command, no npm/PyPI package, no MCP documentation page, no entry in
+  the help centre (the provider's own llms.txt index of 87 pages contains no MCP page),
+  and no MCP registry listing. The gap between the claim and the evidence is the
+  finding here.
+probes:
+- {url: 'https://app.eu1.formality.com/mcp', method: POST tools/list, status: 302,
+   result: redirects to the login host}
+- {url: 'https://app.eu1.formality.com/api/mcp', method: POST tools/list, status: 302,
+   result: redirects to the login host}
+- {url: 'https://app.eu1.formality.com/api/v1/mcp', method: POST tools/list, status: 401,
+   result: 'blanket auth gate - NOT evidence of an endpoint (see caveat)'}
+- {url: 'https://mcp.eu1.formality.com/mcp', method: POST tools/list, status: 404,
+   result: 'host resolves via wildcard DNS to the same IPs as app/auth, but 404s'}
+- {url: 'https://mcp.formality.com', method: dns, status: NXDOMAIN, result: does not resolve}
+- {url: 'https://help.formality.com/mcp', method: POST tools/list, status: 405, result: not an MCP endpoint}
+caveat: >-
+  The 401 on /api/v1/mcp is NOT a positive signal. A deliberately nonsensical path
+  (/api/v1/nonexistentgarbagexyz/zzznotreal) returns the identical 401 with the same
+  17-byte body, so everything under /api/v1/ answers 401 whether or not it exists. No
+  MCP endpoint has been confirmed and none was guessed into this file.
+tools:
+  note: >-
+    The candidate tools below are DERIVED FROM DOCUMENTED REST ENDPOINTS ONLY — the
+    three paths Formality actually publishes. They are a proposal for what an MCP
+    server over this API would expose, not a claim about tools that exist. Input
+    schemas are stated from documented path segments; no parameters were invented,
+    which is why they are minimal.
+  items:
+  - name: get_access_token
+    description: Exchange a personal refresh token for a 5-minute access token.
+    source_operation: 'GET /api/v1/token'
+    input_schema:
+      type: object
+      properties:
+        refresh_token: {type: string, description: The personal refresh token, sent as a bearer credential.}
+      required: [refresh_token]
+    confidence: high
+    note: >-
+      Would normally be handled by the server's auth layer rather than exposed as a
+      tool; listed for completeness because it is one of only three documented paths.
+  - name: list_agreements
+    description: >-
+      List the agreements (contract envelopes) in a workspace, each grouping a main
+      contract with its amendments and annexes.
+    source_operation: 'GET /api/v1/{workspaceId}/agreements'
+    input_schema:
+      type: object
+      properties:
+        workspaceId: {type: string, description: 'Workspace slug, taken from the app URL.'}
+      required: [workspaceId]
+    confidence: high
+    note: >-
+      Pagination and filter parameters certainly exist on a contract repository of any
+      size but are undocumented, so they are absent here rather than guessed.
+  - name: list_agreement_fields
+    description: >-
+      List the custom field / property definitions applied to agreements — the schema
+      behind the AI-extracted summary sheet.
+    source_operation: 'GET /api/v1/{workspaceId}/agreementFields'
+    input_schema:
+      type: object
+      properties:
+        workspaceId: {type: string, description: 'Workspace slug, taken from the app URL.'}
+      required: [workspaceId]
+    confidence: high
+    note: >-
+      The highest-value tool for an agent: it discovers which extracted metadata keys
+      exist in a workspace before reading any contract, which is exactly the
+      "agents never re-read the documents" posture Formality markets.
+tool_crosswalk_emitted: false
+tool_crosswalk_reason: >-
+  A ToolCrosswalk requires a real MCP tool list (or GraphQL schema) AND an OpenAPI to
+  bind against. Formality has neither: no MCP server is published and no OpenAPI is
+  reachable. Writing a crosswalk would mean crosswalking two things we invented.
+gaps_worth_raising_with_provider:
+- >-
+  Either publish the MCP endpoint (URL, auth mode, tools/list) or stop advertising
+  "connection via API/MCP" — right now the claim is unverifiable by any prospective
+  customer or agent.
+- Substantiate "+ 130 contract tools for your AI agents"; nothing public enumerates them.
+- Publish the OpenAPI so a real crosswalk becomes possible.

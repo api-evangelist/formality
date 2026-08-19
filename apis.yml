@@ -39,7 +39,7 @@ accessModel:
     Formality workspace: tokens are minted in Personal Settings, the Swagger UI
     requires login, and the marketing site's only call to action is "Let's talk".
     Billing is on document volume with no published price list.
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-17'
 image: https://framerusercontent.com/images/hEwKjnYt6aQ2PnIpW5a9LjGDmG4.svg

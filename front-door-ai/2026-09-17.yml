@@ -1,0 +1,29 @@
+# Front Door AI Index — formality — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: formality
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.formality.com
+  final_host: www.formality.com
+  ownership: own
+  owner: formality
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 4
+  host_score: 4
+  density: 2.67
+  words: 1496
+  tiers:
+    agentic: 2
+    core: 0
+    model: 2
+  ambiguous: 9
+  top_terms:
+    agent: 9
+    ChatGPT: 1
+    Claude: 1
+    MCP: 1
+    copilot: 1

@@ -48,12 +48,15 @@ specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-17'
 image: https://framerusercontent.com/images/hEwKjnYt6aQ2PnIpW5a9LjGDmG4.svg
+x-docs-platform: gitbook
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Company
 - Ai Ml
 - Legal
 - Contract Management
-- Document-Management
+- Document Management
 - Asset Intelligence
 - Compliance
 - Software-as-a-Service
@@ -66,6 +69,7 @@ tags_raw:
 - Asset Intelligence
 - Compliance
 - SaaS
+- Document-Management
 apis:
 - aid: formality:formality-api
   name: Formality API

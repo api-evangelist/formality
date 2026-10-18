@@ -53,7 +53,7 @@ x-docs-platform-confidence: high
 x-docs-platform-checked: 2026-10-03
 tags:
 - Company
-- Ai Ml
+- Artificial Intelligence
 - Legal
 - Contract Management
 - Document Management
@@ -70,6 +70,7 @@ tags_raw:
 - Compliance
 - SaaS
 - Document-Management
+- Ai Ml
 apis:
 - aid: formality:formality-api
   name: Formality API
